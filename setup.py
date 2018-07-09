@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="csr_utils",
-    version="0.0.1",
+    version="0.1",
     author="Narges Razavian",
     author_email="nsr3@nyu.edu",
-    description="Utility functions for large CSR matrices",
+    description="Utility functions for scalable handling of CSR matrices",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/narges-rzv/csr_utils",
@@ -18,5 +18,6 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ),
+    install_requires=['scipy', 'numpy'],
 )
 
