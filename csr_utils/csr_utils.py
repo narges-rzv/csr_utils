@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.sparse import csr_matrix
+__version__ = '0.1.1'
 
 def normalize_csr_matrix(x, meanarr=None, stdarr=None, ixnormed=None, threshold_to_clip=2000, verbose=True):
     """ Normalizes a CSR matrix only based on non-zero values, without turning it into dense array.
