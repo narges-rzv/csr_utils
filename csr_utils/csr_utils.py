@@ -87,9 +87,6 @@ def normalize_csr_matrix(x, meanarr=None, stdarr=None, ixnormed=None, threshold_
         >>> from scipy.sparse import csr_matrix
 
         >>> x = csr_matrix(np.array([[1, 0, 0], [3, 0, 4], [2, 5, 2]], dtype=float))
-        >>> x
-        <3x2 sparse matrix of type '<class 'numpy.float64'>'
-            with 5 stored elements in Compressed Sparse Row format>
 
         >>> print(x.toarray())
         [[ 1.  0.  0.]
