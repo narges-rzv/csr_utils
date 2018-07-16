@@ -17,7 +17,7 @@ def normalize_csr_matrix(x, meanarr=None, stdarr=None, ixnormed=None, threshold_
 
         Assumptions:
         - If we don't have any observations in a column i, mean_array[i] be set to 0.0, and std_array[i] will be set to 1.0.
-        - If we have a single observation, or if standard deviation is 0.0 for a column, we only subtract the mean for that column.
+        - If we have a single observation, or if standard deviation is 0.0 for a column, we only subtract the mean for that column and effectively eliminate that column.
 
 
         The function allows the normalization to be based on pre-specified mean and standard deviation arrays.
@@ -49,6 +49,7 @@ def normalize_csr_matrix(x, meanarr=None, stdarr=None, ixnormed=None, threshold_
             Only relevant if stdarr and meanarr are both not None.
             If None, all columns will be normalized.
             If not None, only the ixnormed subset of the columns will be normalized.
+            Note: This is not a binary returned values, but rather, includes the indecies of the columns that were normalized. 
 
         threshold_to_clip: scalar number either float or int.
             If standard deviation of each column is above this value, we won't normalize that column.
@@ -85,32 +86,32 @@ def normalize_csr_matrix(x, meanarr=None, stdarr=None, ixnormed=None, threshold_
         >>> import numpy as np
         >>> from scipy.sparse import csr_matrix
 
-        >>> x = csr_matrix(np.array([[1, 0], [3, 4], [2, 2]], dtype=float))
+        >>> x = csr_matrix(np.array([[1, 0, 0], [3, 0, 4], [2, 5, 2]], dtype=float))
         >>> x
         <3x2 sparse matrix of type '<class 'numpy.float64'>'
             with 5 stored elements in Compressed Sparse Row format>
 
         >>> print(x.toarray())
-        [[ 1.  0.]
-         [ 3.  4.]
-         [ 2.  2.]]
+        [[ 1.  0.  0.]
+         [ 3.  0.  4.]
+         [ 2.  5.  2.]]
 
-        >>> xnorm, xmean, xstd, xixnormed = normalize_csr_matrix(x)
+        >>> xnorm, xmean, xstd, xixnormed = csr_utils.normalize_csr_matrix(x)
 
-        >>> a, amean, astd, aixnormed = csr_utils.normalize_csr_matrix(a)
-        print(xnorm.todense())
-        [[-1.22474487  0.        ]
-         [ 1.22474487  1.        ]
-         [ 0.         -1.        ]]
+	>>> print(xnorm.todense())
+        [[-1.22474487  0.          0.        ]
+         [ 1.22474487  0.          1.        ]
+         [ 0.          0.         -1.        ]]
+
 
         >>> xmean
-        array([ 2.,  3.])
+        array([2., 5., 3.])
 
         >>> xstd
-        array([ 0.81649658,  1.        ])
+        array([0.81649658, 1.        , 1.        ])        
 
         >>> xixnormed
-        array([0, 1])
+        array([0, 2])
 
     """
     xnorm = x.copy()
