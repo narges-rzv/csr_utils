@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="csr_utils",
-    version="0.1",
+    version="0.1.2",
     author="Narges Razavian",
     author_email="nsr3@nyu.edu",
     description="Utility functions for scalable handling of CSR matrices",
