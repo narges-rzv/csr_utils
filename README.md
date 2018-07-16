@@ -58,24 +58,28 @@ Example
 ```
 >>> import numpy as np
 >>> from scipy.sparse import csr_matrix
->>> x = csr_matrix(np.array([[1, 0], [3, 4], [2, 2]], dtype=float))
->>> x
-<3x2 sparse matrix of type '<class 'numpy.float64'>'
-    with 5 stored elements in Compressed Sparse Row format>
+
+>>> x = csr_matrix(np.array([[1, 0, 0], [3, 0, 4], [2, 5, 2]], dtype=float))
+
 >>> print(x.toarray())
-[[ 1.  0.]
- [ 3.  4.]
- [ 2.  2.]]
->>> xnorm, xmean, xstd, xixnormed = normalize_csr_matrix(x)
->>> a, amean, astd, aixnormed = csr_utils.normalize_csr_matrix(a)
-print(xnorm.todense())
-[[-1.22474487  0.        ]
- [ 1.22474487  1.        ]
- [ 0.         -1.        ]]
+[[ 1.  0.  0.]
+[ 3.  0.  4.]
+[ 2.  5.  2.]]
+
+>>> xnorm, xmean, xstd, xixnormed = csr_utils.normalize_csr_matrix(x)
+
+>>> print(xnorm.todense())
+[[-1.22474487  0.          0.        ]
+[ 1.22474487  0.          1.        ]
+[ 0.          0.         -1.        ]]
+
 >>> xmean
-array([ 2.,  3.])
+array([2., 5., 3.])
+
 >>> xstd
-array([ 0.81649658,  1.        ])
+array([0.81649658, 1.        , 1.        ])        
+
 >>> xixnormed
-array([0, 1])
+array([0, 2])
+
 ```
