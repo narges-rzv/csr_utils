@@ -18,7 +18,7 @@ Without root access:
 Usage
 -----
 
-```
+```python
 >>> import numpy as np
 >>> from scipy.sparse import csr_matrix
 >>> xcsr = csr_matrix(np.array([[1, 0], [3, 4], [2, 2]], dtype=float))
@@ -55,7 +55,7 @@ normalize_csr_matrix:
         
 Example
 -------
-```
+```python
 >>> import numpy as np
 >>> from scipy.sparse import csr_matrix
 
